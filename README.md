@@ -1,7 +1,7 @@
 No ar: https://main--etanol-ou-alcool.netlify.app
 
 para calcular qual vale mais a pena tem que saber o consumo do carro,
-nesse projeto foi usado valores base de:
+nesse projeto foi usado valores base de: <p>
 consumoGasolina = 10; // km/l
 consumoAlcool = 7; // km/l
 
