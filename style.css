@@ -1,79 +1,176 @@
+:root {
+    --primary-bg: #f6f9fc;
+    --secondary-bg: #ffffff;
+    --text-color: #32325d;
+    --accent-color: #635bff;
+    --hover-color: #5851db;
+    --input-bg: #f0f0f0;
+    --shadow-color: rgba(50, 50, 93, 0.1);
+    --result-color: #090962;  /* Nova cor para o resultado */
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #333;
-    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    line-height: 1.6;
 }
 
 .container {
-    width: 80%;
-    max-width: 400px; /* Define a largura máxima do conteúdo */
-    background-color: #222;
-    padding: 20px;
+    width: 90%;
+    max-width: 450px;
+    background-color: var(--secondary-bg);
+    padding: 2.5rem;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 13px 27px -5px var(--shadow-color), 0 8px 16px -8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    position: relative;  /* Para posicionar o tooltip */
+}
+
+.container:hover {
+    transform: translateY(-5px);
 }
 
 h1 {
-    color: #fff;
+    color: var(--text-color);
     text-align: center;
-    font-size: 14px;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+p {
+    text-align: center;
+    color: #525f7f;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+    position: relative;
 }
 
 label {
-    color: #fff;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
 }
 
 input[type="number"] {
-    width: 90%;
-    padding: 10px;
-    margin-bottom: 10px;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--input-bg);
+    border: 2px solid transparent;
+    border-radius: 6px;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 1px var(--accent-color);
 }
 
 button {
     width: 100%;
-    padding: 10px;
-    background-color: #000000;
-    color: #fff;
+    padding: 0.75rem;
+    background-color: var(--accent-color);
+    color: #ffffff;
     border: none;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
 button:hover {
-    background-color: #001226;
+    background-color: var(--hover-color);
+}
+
+button:active {
+    transform: scale(0.98);
 }
 
 #resultado {
-    margin-top: 20px;
-    font-size: 18px;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: 600;
+    color: var(--result-color);  /* Cor alterada para destacar */
 }
 
 footer {
     text-align: center;
-    padding: 10px;
-    background-color: #1a1a1a;
-    color: #fff;
-    font-size: 14px;
-    margin-top: 50px;
-    margin-bottom: 0;
+    padding: 1rem;
+    background-color: var(--secondary-bg);
+    color: #525f7f;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
 }
 
 footer a {
-    color: #007bff;
+    color: var(--accent-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 footer a:hover {
-    color: #0056b3;
+    color: #ff4136;  /* Vermelho ao passar o mouse */
 }
 
-/* Adicionando um toque de cor vermelha */
-.footer-red {
-    color: #ff0000; /* Vermelho */
+.heart {
+    color: #e25555;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 2rem 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    input[type="number"], button {
+        font-size: 1rem;
+    }
+
+    #resultado {
+        font-size: 1.1rem;
+    }
+
+    footer {
+        font-size: 0.8rem;
+    }}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .container {
+        width: 85%;
+    }
+}
+
+@media (min-width: 769px) {
+    .container {
+        width: 80%;
+    }
 }
