@@ -7,7 +7,27 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="gasstation_4334.png">
 
-    
+       <script>
+        //Anti-Cópia
+        // Desabilitar clique com o botão direito
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          alert('O botão direito do mouse está desativado neste site.');
+        });
+      
+        // Desabilitar teclas de atalho comuns para abrir DevTools
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'F12' || // Tecla F12
+              (e.ctrlKey && e.shiftKey && e.key === 'I') || // Ctrl + Shift + I
+              (e.ctrlKey && e.shiftKey && e.key === 'J') || // Ctrl + Shift + J
+              (e.ctrlKey && e.key === 'U') || // Ctrl + U (View Source)
+              (e.ctrlKey && e.key === 'S') // Ctrl + S (Save Page)
+          ) {
+            e.preventDefault();
+            alert('Este atalho está desativado neste site.');
+          }
+        });
+      </script>
     
 </head>
 <body>
