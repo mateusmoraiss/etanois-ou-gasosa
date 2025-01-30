@@ -80,7 +80,7 @@
                 const economia = gastoEmGasolina - 100; // Diferença REAL
 
                 resultado = "Compensa mais abastecer com Álcool.";
-                economiaTexto = `Com R$100 de Álcool, você economiza R$ ${Math.abs(economia).toFixed(2)} em Gasolina.`;
+                economiaTexto = `A cada R$100 de Álcool, você economiza Aproximadamente R$ ${Math.abs(economia).toFixed(2)} em Gasolina.`;
             } 
             else if (kmPorRealGasolina > kmPorRealAlcool) {
                 // Se gasolina compensa mais
@@ -89,7 +89,7 @@
                 const economia = gastoEmAlcool - 100; // Diferença REAL
 
                 resultado = "Compensa mais abastecer com Gasolina.";
-                economiaTexto = `Com R$100 de Gasolina, você economiza R$ ${Math.abs(economia).toFixed(2)} em Álcool.`;
+                economiaTexto = `A cada R$100 de Gasolina, você economiza Aproximadamente R$ ${Math.abs(economia).toFixed(2)} em Álcool.`;
             } 
             else {
                 resultado = "Ambos têm o mesmo custo-benefício.";
