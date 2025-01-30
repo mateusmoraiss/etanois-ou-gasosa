@@ -3,124 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Etanol ou Gasolina?</title>
+    <title>Etanol ou Gasolina?</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="gasstation_4334.png">
 
-       <script>
-        //Anti-Cópia 
-           
-    //   Se chegou até aqui, deve estar muito interessado em copiar. Cuidado: plágio é crime, e eu sei exatamente onde te achar! //
-           
-        // Desabilitar clique com o botão direito
+    <script>
+        // Anti-Cópia
         document.addEventListener('contextmenu', function(e) {
-          e.preventDefault();
-          alert('O botão direito do mouse está desativado neste site.');
-        });
-      
-        // Desabilitar teclas de atalho comuns para abrir DevTools
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'F12' || // Tecla F12
-              (e.ctrlKey && e.shiftKey && e.key === 'I') || // Ctrl + Shift + I
-              (e.ctrlKey && e.shiftKey && e.key === 'J') || // Ctrl + Shift + J
-              (e.ctrlKey && e.key === 'U') || // Ctrl + U (View Source)
-              (e.ctrlKey && e.key === 'S') // Ctrl + S (Save Page)
-          ) {
             e.preventDefault();
-            alert('Este atalho está desativado neste site.');
-          }
+            alert('O botão direito do mouse está desativado neste site.');
         });
-      </script>
-    
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || // Tecla F12
+                (e.ctrlKey && e.shiftKey && e.key === 'I') || // Ctrl + Shift + I
+                (e.ctrlKey && e.shiftKey && e.key === 'J') || // Ctrl + Shift + J
+                (e.ctrlKey && e.key === 'U') || // Ctrl + U (View Source)
+                (e.ctrlKey && e.key === 'S') // Ctrl + S (Save Page)
+            ) {
+                e.preventDefault();
+                alert('Este atalho está desativado neste site.');
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="container">
         <div id="saudacao"></div>
 
-    <label for="precoGasolina">Preço da Gasolina:</label>
-    <input type="number" id="precoGasolina" step="0.01"><br><br>
+        <label for="precoGasolina">Preço da Gasolina:</label>
+        <input type="number" id="precoGasolina" step="0.01"><br><br>
 
-    <label for="precoAlcool">Preço do Álcool: </label>
-    <input type="number" id="precoAlcool" step="0.01"><br><br>
-    
-    
-    <button onclick="calcular()">Calcular</button><br><br>
-    
+        <label for="precoAlcool">Preço do Álcool: </label>
+        <input type="number" id="precoAlcool" step="0.01"><br><br>
 
-    <div id="resultado"></div>
-      
-    <footer>
-        Feito com  <a href="https://www.instagram.com/mateusmoraiskrr/" class="footer-red">❤️ Mateus Morais</a>
-    </footer>
+        <button onclick="calcular()">Calcular</button><br><br>
 
-    <div style="padding-top: 30px;">
-    O que é O que é? <br> 
-    Não votou em ninguém da esquerda, (não é esquerdista)<br>Não votou em ninguém da direita, (não é direitista) <br>
-        é o Frentista kkkkkkkkkkkkk <br> <br>
+        <div id="resultado"></div>
+
+        <footer>
+            Feito com <a href="https://www.instagram.com/mateusmoraiskrr/" class="footer-red">❤️ Mateus Morais</a>
+        </footer>
+
+        <div style="padding-top: 30px;">
+            O que é O que é? <br>
+            Não votou em ninguém da esquerda, (não é esquerdista)<br>
+            Não votou em ninguém da direita, (não é direitista) <br>
+            é o Frentista kkkkkkkkkkkkk <br><br>
+        </div>
     </div>
 
-    
-</div>
-
-
-
-
     <script>
-     function calcular() {
-    const precoGasolina = parseFloat(document.getElementById('precoGasolina').value);
-    const precoAlcool = parseFloat(document.getElementById('precoAlcool').value);
-    const consumoGasolina = 10; // km/l
-    const consumoAlcool = 7; // km/l
+        function calcular() {
+            const precoGasolina = parseFloat(document.getElementById('precoGasolina').value);
+            const precoAlcool = parseFloat(document.getElementById('precoAlcool').value);
+            const consumoGasolina = 10; // km por litro
+            const consumoAlcool = 7; // km por litro
 
-    // Quantos km você roda com R$ 100 de cada combustível
-    const kmComGasolina = (100 / precoGasolina) * consumoGasolina;
-    const kmComAlcool = (100 / precoAlcool) * consumoAlcool;
+            // Validação simples
+            if (precoGasolina <= 0 || precoAlcool <= 0 || isNaN(precoGasolina) || isNaN(precoAlcool)) {
+                alert("⚠️ Valores inválidos! Insira preços maiores que zero.");
+                return;
+            }
 
-    // Custo para rodar os km do combustível A usando o combustível B
-    const custoGasolinaParaRodarKmAlcool = (kmComAlcool / consumoGasolina) * precoGasolina;
-    const custoAlcoolParaRodarKmGasolina = (kmComGasolina / consumoAlcool) * precoAlcool;
+            // Cálculo básico de eficiência (km por R$1)
+            const kmPorRealGasolina = consumoGasolina / precoGasolina;
+            const kmPorRealAlcool = consumoAlcool / precoAlcool;
 
-    let resultado = '';
-    let economiaTexto = '';
+            let resultado = '';
+            let economiaTexto = '';
 
-    if (kmComAlcool / precoAlcool > kmComGasolina / precoGasolina) {
-        const economia = custoGasolinaParaRodarKmAlcool - 100;
-        resultado = `Compensa mais abastecer com Álcool.`;
-        economiaTexto = `A cada R$ 100 de Álcool, você economiza R$ ${economia.toFixed(2)} em comparação à Gasolina.`;
-    } else if (kmComGasolina / precoGasolina > kmComAlcool / precoAlcool) {
-        const economia = custoAlcoolParaRodarKmGasolina - 100;
-        resultado = `Compensa mais abastecer com Gasolina.`;
-        economiaTexto = `A cada R$ 100 de Gasolina, você economiza R$ ${economia.toFixed(2)} em comparação ao Álcool.`;
-    } else {
-        resultado = 'Ambos têm o mesmo custo por quilômetro.';
-        economiaTexto = 'Não há economia entre os combustíveis.';
-    }
+            if (kmPorRealAlcool > kmPorRealGasolina) {
+                // Se álcool compensa mais
+                const kmRodadosComAlcool = (100 / precoAlcool) * consumoAlcool;
+                const gastoEmGasolina = (kmRodadosComAlcool / consumoGasolina) * precoGasolina;
+                const economia = gastoEmGasolina - 100; // Diferença REAL
 
-    document.getElementById('resultado').innerHTML = `
-        <div>${resultado}</div>
-        <div class="economia-texto">${economiaTexto}</div>
-    `;
-}
+                resultado = "Compensa mais abastecer com Álcool.";
+                economiaTexto = `Com R$100 de Álcool, você economiza R$ ${Math.abs(economia).toFixed(2)} em Gasolina.`;
+            } 
+            else if (kmPorRealGasolina > kmPorRealAlcool) {
+                // Se gasolina compensa mais
+                const kmRodadosComGasolina = (100 / precoGasolina) * consumoGasolina;
+                const gastoEmAlcool = (kmRodadosComGasolina / consumoAlcool) * precoAlcool;
+                const economia = gastoEmAlcool - 100; // Diferença REAL
 
-    </script>
+                resultado = "Compensa mais abastecer com Gasolina.";
+                economiaTexto = `Com R$100 de Gasolina, você economiza R$ ${Math.abs(economia).toFixed(2)} em Álcool.`;
+            } 
+            else {
+                resultado = "Ambos têm o mesmo custo-benefício.";
+                economiaTexto = "Escolha o que preferir!";
+            }
 
-<script>
-    function obterSaudacao() {
-        const hora = new Date().getHours();
-        if (hora >= 5 && hora < 12) {
-            return "Bom Dia, Motorista!";
-        } else if (hora >= 12 && hora < 18) {
-            return "Boa Tarde, Motorista!";
-        } else if (hora >= 18 && hora < 24) {
-            return "Boa Noite, Motorista!";
-        } else {
-            return "Boa Madrugada, Motorista!";
+            document.getElementById('resultado').innerHTML = `
+                <div>${resultado}</div>
+                <div class="economia-texto">${economiaTexto}</div>
+            `;
         }
-    }
 
-    document.getElementById('saudacao').textContent = obterSaudacao();
-</script>
+        function obterSaudacao() {
+            const hora = new Date().getHours();
+            if (hora >= 5 && hora < 12) {
+                return "Bom Dia, Motorista!";
+            } else if (hora >= 12 && hora < 18) {
+                return "Boa Tarde, Motorista!";
+            } else if (hora >= 18 && hora < 24) {
+                return "Boa Noite, Motorista!";
+            } else {
+                return "Boa Madrugada, Motorista!";
+            }
+        }
 
-    
+        document.getElementById('saudacao').textContent = obterSaudacao();
+    </script>
 </body>
 </html>
