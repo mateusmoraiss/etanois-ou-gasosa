@@ -52,6 +52,13 @@
     <footer>
         Feito com  <a href="https://www.instagram.com/mateusmoraiskrr/" class="footer-red">❤️ Mateus Morais</a>
     </footer>
+
+    <div style="padding-top: 30px;">
+    O que é O que é? <br> 
+    Não votou em ninguém da esquerda, (não é esquerdista)<br>Não votou em ninguém da direita, (não é direitista) <br>
+        é o Frentista kkkkkkkkkkkkk <br> <br>
+    </div>
+
     
 </div>
 
@@ -59,24 +66,31 @@
 
 
     <script>
-      function calcular() {
+     function calcular() {
     const precoGasolina = parseFloat(document.getElementById('precoGasolina').value);
     const precoAlcool = parseFloat(document.getElementById('precoAlcool').value);
     const consumoGasolina = 10; // km/l
     const consumoAlcool = 7; // km/l
-    const custoGasolina = precoGasolina / consumoGasolina;
-    const custoAlcool = precoAlcool / consumoAlcool;
+
+    // Quantos km você roda com R$ 100 de cada combustível
+    const kmComGasolina = (100 / precoGasolina) * consumoGasolina;
+    const kmComAlcool = (100 / precoAlcool) * consumoAlcool;
+
+    // Custo para rodar os km do combustível A usando o combustível B
+    const custoGasolinaParaRodarKmAlcool = (kmComAlcool / consumoGasolina) * precoGasolina;
+    const custoAlcoolParaRodarKmGasolina = (kmComGasolina / consumoAlcool) * precoAlcool;
+
     let resultado = '';
     let economiaTexto = '';
 
-    if (custoAlcool < custoGasolina) {
+    if (kmComAlcool / precoAlcool > kmComGasolina / precoGasolina) {
+        const economia = custoGasolinaParaRodarKmAlcool - 100;
         resultado = `Compensa mais abastecer com Álcool.`;
-        const economia = 100 - (custoAlcool / custoGasolina * 100);
-        economiaTexto = `Você economizará aproximadamente R$ ${economia.toFixed(2)} a cada R$ 100 de combustível.`;
-    } else if (custoGasolina < custoAlcool) {
+        economiaTexto = `A cada R$ 100 de Álcool, você economiza R$ ${economia.toFixed(2)} em comparação à Gasolina.`;
+    } else if (kmComGasolina / precoGasolina > kmComAlcool / precoAlcool) {
+        const economia = custoAlcoolParaRodarKmGasolina - 100;
         resultado = `Compensa mais abastecer com Gasolina.`;
-        const economia = 100 - (custoGasolina / custoAlcool * 100);
-        economiaTexto = `Você economizará aproximadamente R$ ${economia.toFixed(2)} a cada R$ 100 de combustível.`;
+        economiaTexto = `A cada R$ 100 de Gasolina, você economiza R$ ${economia.toFixed(2)} em comparação ao Álcool.`;
     } else {
         resultado = 'Ambos têm o mesmo custo por quilômetro.';
         economiaTexto = 'Não há economia entre os combustíveis.';
